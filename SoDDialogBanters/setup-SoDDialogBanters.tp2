@@ -1,0 +1,113 @@
+/*
+ * "SoD Dialog Banters" for Siege of Dragonspear
+ * AstroBryGuy
+ * Adapted from SoD Banter Restoration (for EET) by Roxanne
+ *
+*/
+
+/* Backup folder */
+BACKUP ~SoDDialogBanters/backup~
+
+AUTHOR ~AstroBryGuy~
+
+/* enable all error messages; nothing suppressed. comment this out for release version */
+MODDER
+
+VERSION ~v1.0~
+
+README ~SoDDialogBanters/readme.md~
+
+AUTO_TRA ~SoDDialogBanters/tra/%s~
+LANGUAGE ~English~ ~English~ ~SoDDialogBanters/tra/english/setup-SoDDialogBanters.tra~
+
+BEGIN @0 /* SoD Dialog Banters */
+	REQUIRE_PREDICATE GAME_INCLUDES ~sod~ @5 /* You must have Baldur's Gate: Siege of Dragonspear installed. */
+	REQUIRE_PREDICATE NOT GAME_IS ~eet~ @6 /* This mod is not compatible with EET. */
+
+// Add BDBANTER.2DA file to set banter dialogue files
+ACTION_IF !(FILE_EXISTS_IN_GAME ~BDBANTER.2DA~) THEN BEGIN
+	COPY ~SoDDialogBanters/BDBANTER.2DA~ ~override~
+END
+
+// Read in banter dialog filenames from BDBANTER.2DA
+COPY_EXISTING ~BDBANTER.2DA~ ~override~
+   COUNT_2DA_COLS cols
+   COUNT_2DA_ROWS cols rows
+   FOR ( row = 1 ; row < rows ; row = row + 1 ) BEGIN
+      READ_2DA_ENTRY %row% 0 2 npc
+      READ_2DA_ENTRY %row% 1 2 dlg
+      DEFINE_ASSOCIATIVE_ARRAY bdialogs BEGIN "%npc%" => "%dlg%" END
+   END
+BUT_ONLY
+
+ACTION_PHP_EACH bdialogs AS yoo => hoo BEGIN
+	ACTION_MATCH ~%yoo%~ WITH
+		~MINSC~ BEGIN OUTER_TEXT_SPRINT "MINSC_BANTER" ~%hoo%~ 
+		END
+		~DYNAHEIR~ BEGIN OUTER_TEXT_SPRINT "DYNAHEIR_BANTER" ~%hoo%~ 
+		END
+		~KHALID~ BEGIN OUTER_TEXT_SPRINT "KHALID_BANTER" ~%hoo%~ 
+		END
+		~JAHEIRA~ BEGIN OUTER_TEXT_SPRINT "JAHEIRA_BANTER" ~%hoo%~ 
+		END
+		~SAFANA~ BEGIN OUTER_TEXT_SPRINT "SAFANA_BANTER" ~%hoo%~ 
+		END
+		~EDWIN~ BEGIN OUTER_TEXT_SPRINT "EDWIN_BANTER" ~%hoo%~ 
+		END
+		~VICONIA~ BEGIN OUTER_TEXT_SPRINT "VICONIA_BANTER" ~%hoo%~ 
+		END
+		~NEERA~ BEGIN OUTER_TEXT_SPRINT "NEERA_BANTER" ~%hoo%~ 
+		END
+		~DORN~ BEGIN OUTER_TEXT_SPRINT "DORN_BANTER" ~%hoo%~ 
+		END
+		~RASAAD~ BEGIN OUTER_TEXT_SPRINT "RASAAD_BANTER" ~%hoo%~ 
+		END
+		~BAELOTH~ BEGIN OUTER_TEXT_SPRINT "BAELOTH_BANTER" ~%hoo%~ 
+		END
+		~VOGHILN~ BEGIN OUTER_TEXT_SPRINT "VOGHILN_BANTER" ~%hoo%~ 
+		END
+		~MKHIIN~ BEGIN OUTER_TEXT_SPRINT "MKHIIN_BANTER" ~%hoo%~ 
+		END
+		~CORWIN~ BEGIN OUTER_TEXT_SPRINT "CORWIN_BANTER" ~%hoo%~ 
+		END
+		~GLINT~ BEGIN OUTER_TEXT_SPRINT "GLINT_BANTER" ~%hoo%~ 
+		END
+		DEFAULT
+			PRINT ~Skipping %yoo%~
+	END
+END
+
+// Create DLG files for bdialogs
+ACTION_PHP_EACH bdialogs AS yoo => hoo BEGIN
+	ACTION_MATCH %yoo%
+	WITH
+		DEFAULT
+			ACTION_IF NOT FILE_EXISTS_IN_GAME ~%hoo%.dlg~ THEN BEGIN
+<<<<<<<< .../soddialogbanters-inlined/%hoo%.d
+BEGIN %hoo%
+>>>>>>>>
+				COMPILE EVALUATE_BUFFER ~.../soddialogbanters-inlined/%hoo%.d~ USING ~SoDDialogBanters/tra/english/setup-SoDDialogBanters.tra~
+			END
+	END
+END
+
+// Compile banter dialogs
+COMPILE EVALUATE_BUFFER ~SoDDialogBanters/BDBanters.d~ USING ~SoDDialogBanters/tra/english/setup-SoDDialogBanters.tra~
+	
+// Edit NPC scripts to start Interact actions for banters
+COPY ~SoDDialogBanters/BDBANXXX.2DA~ ~override~
+	COUNT_2DA_COLS cols
+	COUNT_2DA_ROWS cols rows
+	FOR ( row = 0 ; row < rows ; row = row + 1 ) BEGIN
+		READ_2DA_ENTRY %row% 0 3 banter
+    	READ_2DA_ENTRY %row% 1 3 script
+    	READ_2DA_ENTRY %row% 2 3 interact
+      	INNER_ACTION BEGIN
+      		COPY_EXISTING ~%script%.BCS~ ~override~
+    			DECOMPILE_AND_PATCH BEGIN
+        			REPLACE_TEXTUALLY ~SetAreaScript("%banter%",GENERAL)~ ~Interact("%interact%")~
+        		END
+        	BUT_ONLY
+      	END
+	END
+BUT_ONLY
