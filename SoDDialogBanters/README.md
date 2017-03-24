@@ -11,6 +11,8 @@ The mod does *not* change the style of the compliment/insult NPC interactions. T
 
 ## Installation
 
+*Note for Steam/GOG users:* Before installing any mods, you will need to use the (ModMerge)[https://forums.beamdog.com/discussion/50441/modmerge-merge-your-steam-gog-zip-based-dlc-into-something-weidu-nearinfinity-dltcep-can-use/p1] utility to make your game moddable.
+
 ### Windows 
 If the mod was previously installed, uninstall it before extracting the new version. The mod is packaged and installed with WeiDU. To install, extract the mod archive, then copy of the contents of the archive into your game folder (the folder which contains the chitin.key file). If properly extracted, you should have a "SoDDialogBanters" folder and setup-SoDDialogBanters.exe in your game folder. To install, simply double-click setup-SoDDialogBanters.exe and follow the instructions on screen. 
 
