@@ -596,7 +596,7 @@ DO ~SetGlobal("bd_pbdd050_set","LOCALS",3)~
 ==%RASAAD_BANTER% #59160 // ~Most refrain from setting their own dwellings aflame when preparing a repast.~
 ==%NEERA_BANTER% #59161 // ~"Most" people live in fear and misery. Maybe they SHOULD set their houses on fire to make dinner. Ever think of that?~
 ==%RASAAD_BANTER% #59162 // ~I admit, I had not.~
-==%GLINT_BANTER%  IF~IsValidForPartyDialogue("GLINT")~ THEN #59163 // ~I think you may be on to something, Neera. What about a-a-a "fire box"? Something that continually emits fireballs! You could cook a potato in no time! ~
+==%GLINT_BANTER%  IF~IsValidForPartyDialogue("GLINT")~ THEN #59163 // ~I think you may be on to something, Neera. What about a-a-a "fire box"? Something that continually emits fireballs! You could cook a potato in no time!~
 ==%GLINT_BANTER%  IF~IsValidForPartyDialogue("GLINT")~ THEN #60145 // ~Magic... I just love it.~
 EXIT
 
