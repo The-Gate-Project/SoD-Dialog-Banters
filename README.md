@@ -19,7 +19,7 @@ If the mod was previously installed, uninstall it before extracting the new vers
 Please run setup-SoDDialogBanters.exe in your game folder to reinstall, uninstall or otherwise change components. 
 
 ### Mac OS X 
-If the mod was previously installed, uninstall it before extracting the new version. Chatty Imoen is packaged and installed with WeiDU. To install, extract the mod archive, then copy of the contents of the folder "OSX-SoDDialogBanters-v1" into your game folder (the folder which contains the chitin.key file). If properly extracted, you should have a "SoDDialogBanters" folder, setup-SoDDialogBanters, and setup-SoDDialogBanters.command in your game folder. To install, simply double-click setup-SoDDialogBanters.command and follow the instructions on screen. 
+If the mod was previously installed, uninstall it before extracting the new version. SoD Dialog Banters is packaged and installed with WeiDU. To install, extract the mod archive, then copy of the contents of the folder "OSX-SoDDialogBanters-v1" into your game folder (the folder which contains the chitin.key file). If properly extracted, you should have a "SoDDialogBanters" folder, setup-SoDDialogBanters, and setup-SoDDialogBanters.command in your game folder. To install, simply double-click setup-SoDDialogBanters.command and follow the instructions on screen. 
 
 
 ## Contact Information

@@ -11,7 +11,7 @@ BACKUP ~SoDDialogBanters/backup~
 AUTHOR ~AstroBryGuy~
 
 /* enable all error messages; nothing suppressed. comment this out for release version */
-MODDER
+// MODDER
 
 VERSION ~v1.0~
 

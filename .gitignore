@@ -1,2 +1,4 @@
 
 .DS_Store
+*.zip
+package_mod.sh
